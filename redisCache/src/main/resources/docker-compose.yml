@@ -1,0 +1,20 @@
+version: "1.0"
+services:
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/testData/sample/redisCache/data:/data
+#    entrypoint: >
+#      redis-server
+#        --loadmodule /usr/lib/redis/modules/redisjson.so
+#        --loadmodule /usr/lib/redis/modules/redisai.so
+#        --loadmodule /usr/lib/redis/modules/redisearch.so
+#        --loadmodule /usr/lib/redis/modules/redisgraph.so
+#        --loadmodule /usr/lib/redis/modules/redisbloom.so
+#        --loadmodule /var/opt/redislabs/libs/modules/redisgears.so
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
