@@ -38,3 +38,4 @@ out/
 /media/
 /src/main/java/bootiful/observability/ffmpeg/
 /audio/
+/src/main/resources/prometheus/data/data/

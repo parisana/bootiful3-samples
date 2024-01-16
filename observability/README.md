@@ -8,6 +8,8 @@ testController endpoint:
 apachePerformance monitoring:
     - http://localhost:8080/monitoring
 
+http://localhost:8080/ffmpeg/test
+
 ### Resync git repo with new .gitignore file
 1. rm all files
    - git rm -r --cached .

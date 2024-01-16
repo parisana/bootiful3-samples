@@ -1,0 +1,32 @@
+# docker compose up --remove-orphans
+---
+version: '1'
+
+volumes:
+#  A volume in Docker is used to persist data between container restarts and ensure data integrity. In this case, it is used to store Prometheus data. The driver: local indicates that the volume will be managed locally on the host machine.
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    user: root
+    container_name: prometheus # sets the name of the container
+    ports:
+      - 9090:9090 # maps port 9090 on the host to port 9090 on the Prometheus container.
+    command: "--config.file=/etc/prometheus/prometheus.yaml" # Specifies the command to run when the container starts, providing the path to the Prometheus configuration file
+    volumes:
+      - ./config/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro #Mounts the local Prometheus configuration file into the container
+      - ./data:/prometheus # Mounts the local directory ./data into the /prometheus directory inside the container
+#      the container will be restarted unless it is explicitly stopped by the user
+    restart: unless-stopped
+  
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
