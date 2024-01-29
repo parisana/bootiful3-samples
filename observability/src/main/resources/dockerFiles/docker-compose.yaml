@@ -9,6 +9,11 @@ volumes:
   grafana-data:
     driver: local
 services:
+#  spring-app-observability:
+#    image: 'observability:latest'
+#    container_name: observability
+#    ports:
+#      - '8080:8080'
   zipkin:
     image: 'openzipkin/zipkin:latest'
     container_name: zipkin
